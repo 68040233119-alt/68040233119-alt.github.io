@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chirayu Thanyachiangphin - Personal Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(0, 150, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 2rem;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 28%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            border-color: rgba(0, 255, 136, 0.5);
+            box-shadow: 0 12px 48px rgba(0, 255, 136, 0.2);
+        }
+
+        .profile-image {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff88, #0096ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .profile-title {
+            font-size: 1rem;
+            color: #0096ff;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .profile-bio {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: rgba(0, 255, 136, 0.3);
+            border-color: #00ff88;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .contact-info {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 1rem;
+        }
+
+        .contact-info p {
+            margin: 0.3rem 0;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 255, 136, 0.4);
+            box-shadow: 0 12px 48px rgba(0, 255, 136, 0.15);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-subtitle {
+            font-size: 1.2rem;
+            color: #0096ff;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* Resume Section */
+        .typing-effect {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            color: #00ff88;
+            min-height: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .resume-intro {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .interests-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .interest-item {
+            background: rgba(0, 255, 136, 0.05);
+            border-left: 3px solid #00ff88;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .interest-item:hover {
+            background: rgba(0, 255, 136, 0.1);
+            transform: translateX(5px);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-card {
+            background: rgba(0, 150, 255, 0.05);
+            border: 1px solid rgba(0, 150, 255, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            background: rgba(0, 150, 255, 0.1);
+            border-color: #0096ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 150, 255, 0.2);
+        }
+
+        .project-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0096ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .project-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #00ff88, #0096ff);
+            color: #000;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .project-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Contribution Graph */
+        .contribution-graph {
+            margin-top: 1.5rem;
+        }
+
+        .graph-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+            gap: 4px;
+            margin-top: 1rem;
+            max-width: 100%;
+        }
+
+        .graph-cell {
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .graph-cell:hover {
+            transform: scale(1.2);
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        .graph-cell.level-1 { background: rgba(0, 255, 136, 0.2); }
+        .graph-cell.level-2 { background: rgba(0, 255, 136, 0.4); }
+        .graph-cell.level-3 { background: rgba(0, 255, 136, 0.6); }
+        .graph-cell.level-4 { background: #00ff88; }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: #00ff88;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            bottom: 130%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            border: 1px solid rgba(0, 255, 136, 0.5);
+        }
+
+        .graph-cell:hover .tooltip {
+            opacity: 1;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .card, .profile-card {
+                padding: 1.5rem;
+            }
+
+            .resume-intro {
+                font-size: 1.5rem;
+            }
+
+            .interests-list {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-image {
+                width: 100px;
+                height: 100px;
+                font-size: 3rem;
+            }
+
+            .profile-name {
+                font-size: 1.4rem;
+            }
+
+            .graph-container {
+                grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+                gap: 3px;
+            }
+
+            .graph-cell {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem;
+                gap: 1rem;
+            }
+
+            .card, .profile-card {
+                padding: 1rem;
+                border-radius: 12px;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+
+            .resume-intro {
+                font-size: 1.3rem;
+            }
+
+            .typing-effect {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 136, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 136, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile-card">
+                <div class="profile-image">👨‍💻</div>
+                <h1 class="profile-name">Chirayu Thanyachiangphin</h1>
+                <p class="profile-title">นักศึกษา</p>
+                <p class="profile-bio">ผมคนไทยที่ชอบเรียนรู้เทคโนโลยีใหม่ๆ และพัฒนาทักษะการเขียนโค้ด</p>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link" title="GitHub">🐙</a>
+                    <a href="mailto:your@email.com" class="social-link" title="Email">📧</a>
+                    <a href="#" class="social-link" title="LinkedIn">💼</a>
+                    <a href="#" class="social-link" title="Location">📍</a>
+                </div>
+
+                <div class="contact-info">
+                    <p>📧 your@email.com</p>
+                    <p>📍 Thailand</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- RESUME SECTION -->
+            <section class="card">
+                <h2 class="resume-intro">สวัสดี! 👋 ผมชื่อ Chirayu Thanyachiangphin</h2>
+                <p class="typing-effect" id="typingText"></p>
+
+                <h3 class="card-subtitle">🎯 สิ่งที่กำลังสนใจ</h3>
+                <div class="interests-list">
+                    <div class="interest-item">💻 Web Development</div>
+                    <div class="interest-item">🎨 UI/UX Design</div>
+                    <div class="interest-item">⚡ JavaScript & React</div>
+                    <div class="interest-item">🚀 Tech Innovation</div>
+                </div>
+            </section>
+
+            <!-- PROJECTS SECTION -->
+            <section class="card">
+                <h2 class="card-title">📌 Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3 class="project-name">Personal Portfolio</h3>
+                        <p class="project-desc">เว็บไซต์โปรโฟล์ส่วนตัวที่สร้างด้วย HTML, CSS และ Vanilla JS พร้อม Glassmorphism Design</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <a href="#" class="project-link">ดูโปรเจกต์ →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTRIBUTION GRAPH -->
+            <section class="card">
+                <h2 class="card-title">📊 Contribution Graph</h2>
+                <p style="color: #888; font-size: 0.9rem; margin-bottom: 1rem;">บันทึกการมีส่วนร่วมของคุณ (Contribution Timeline)</p>
+                <div class="contribution-graph">
+                    <div class="graph-container" id="graphContainer"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // ===== TYPING EFFECT =====
+        const typingText = id('typingText');
+        const textToType = 'ผมชอบเขียนโค้ด เรียนรู้เทคโนโลยีใหม่ๆ และสร้างสิ่งที่มีประโยชน์บนเว็บ 🌐';
+        let charIndex = 0;
+
+        function typeEffect() {
+            if (charIndex < textToType.length) {
+                typingText.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeEffect, 50);
+            } else {
+                typingText.textContent += ' |';
+                setTimeout(() => {
+                    typingText.textContent = typingText.textContent.slice(0, -1);
+                }, 2000);
+                setTimeout(() => {
+                    charIndex = 0;
+                    typingText.textContent = '';
+                    typeEffect();
+                }, 2500);
+            }
+        }
+
+        // ===== CONTRIBUTION GRAPH =====
+        function generateContributionGraph() {
+            const container = id('graphContainer');
+            const cellCount = 343; // 49 weeks × 7 days
+
+            for (let i = 0; i < cellCount; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'graph-cell';
+                
+                const level = Math.floor(Math.random() * 5);
+                if (level > 0) cell.classList.add(`level-${level}`);
+
+                const date = new Date();
+                date.setDate(date.getDate() - (cellCount - i));
+                
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = `${level * 2} contributions on ${date.toLocaleDateString('th-TH')}`;
+                
+                cell.appendChild(tooltip);
+                container.appendChild(cell);
+            }
+        }
+
+        // ===== UTILITIES =====
+        function id(elementId) {
+            return document.getElementById(elementId);
+        }
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', () => {
+            typeEffect();
+            generateContributionGraph();
+        });
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
